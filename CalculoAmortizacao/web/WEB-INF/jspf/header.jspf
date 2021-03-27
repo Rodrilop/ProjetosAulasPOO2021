@@ -1,0 +1,13 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
+<%@page pageEncoding="UTF-8" %>
+
+<%SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    Calendar cal = Calendar.getInstance();%>
+                
+<table align="right">
+    <tr>
+         <th><%= "Praia Grande, " + df.format(cal.getTime())%></th>
+    </tr>
+</table>
