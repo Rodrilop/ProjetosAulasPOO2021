@@ -4,7 +4,7 @@
 
 <%
    if(request.getParameter("session.login")!=null){
-       if(request.getParameter("session.login").isEmpty){
+       if(request.getParameter("session.username").isEmpty()){
        String username = request.getParameter("session.username");
        session.setAttribute("session.username", username);
        response.sendRedirect(request.getRequestURI());
