@@ -1,7 +1,0 @@
-<%-- any content can be specified here e.g.: --%>
-<%@ page pageEncoding="UTF-8" %>
-<div>
-    <hr/>
-    <p><b>Rodrigo Carlos de Souza Lopes</b></p>
-    <p><b>RA: 1290481923049</b></p> 
-</div>
