@@ -5,6 +5,8 @@
  */
 package web;
 
+import db.Category;
+import db.Transaction;
 import db.User;
 import java.sql.*;
 import javax.servlet.ServletContextEvent;
@@ -16,28 +18,36 @@ import javax.servlet.ServletContextListener;
  * @author RodrigoLopes
  */
 public class DbListener implements ServletContextListener {
+
     public static final String CLASS_NAME = "org.sqlite.JDBC";
     public static final String URL = "jdbc:sqlite:my-finances.db";
     public static Exception exception = null;
-    
-    public static Connection getConnection() throws Exception{
+
+    public static Connection getConnection() throws Exception {
         return DriverManager.getConnection(URL);
     }
-    
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        try{
+        try {
             Class.forName(CLASS_NAME);
             Connection con = getConnection();
             Statement stmt = con.createStatement();
             stmt.execute(User.getCreateStatement());
-            if(User.getUsers().isEmpty()){
+            if (User.getUsers().isEmpty()) {
                 User.insertUser("admin", "Administrador", "ADMIN", "1234");
                 User.insertUser("fulano", "Fulano da Silva", "USER", "1234");
             }
+            stmt.execute(Category.getCreateStatement());
+            if (Category.getList().isEmpty()) {
+                Category.insert("Alimentação", "Despesas com restaurantes, mercado, etc");
+                Category.insert("Moradia", "Despesas com aluguel, IPTU, serviços residenciais, etc");
+                Category.insert("Outros", "Despesas e receitas em geral");
+            }
+            stmt.execute(Transaction.getCreateStatement());
             stmt.close();
             con.close();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             exception = ex;
         }
     }

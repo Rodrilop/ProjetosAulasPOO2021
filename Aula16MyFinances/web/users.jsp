@@ -11,21 +11,21 @@
 <%
     String requestError = null;
     ArrayList<User> users = new ArrayList<>();
-    try{
-        if(request.getParameter("insert")!=null){
+    try {
+        if (request.getParameter("insert") != null) {
             String login = request.getParameter("login");
             String name = request.getParameter("name");
             String role = request.getParameter("role");
             String password = request.getParameter("password");
             User.insertUser(login, name, role, password);
             response.sendRedirect(request.getRequestURI());
-        }else if(request.getParameter("delete")!=null){
+        } else if (request.getParameter("delete") != null) {
             String login = request.getParameter("login");
             User.deleteUser(login);
             response.sendRedirect(request.getRequestURI());
         }
         users = User.getUsers();
-    }catch(Exception ex){
+    } catch (Exception ex) {
         requestError = ex.getMessage();
     }
 %>
@@ -37,16 +37,16 @@
     <body>
         <%@include file="WEB-INF/jspf/header.jspf" %>
         <h2>Usuários</h2>
-        <%if(requestError!=null){%>
-        <div style="color: red"><%= requestError %></div>
+        <%if (requestError != null) {%>
+        <div style="color: red"><%= requestError%></div>
         <%}%>
-        
-        <%if(session.getAttribute("user.login") == null){%>
-            <div>Página restrita a usuários logados</div>
-        <%}else if(!session.getAttribute("user.role").equals("ADMIN")){%>
-            <div>Página restrita a administradores</div>
-        <%}else{%>
-        
+
+        <%if (session.getAttribute("user.login") == null) {%>
+        <div>Página restrita a usuários logados</div>
+        <%} else if (!session.getAttribute("user.role").equals("ADMIN")) {%>
+        <div>Página restrita a administradores</div>
+        <%} else {%>
+
         <form method="post">
             Login: <input type="text" name="login"/>
             Nome: <input type="text" name="name"/>
@@ -65,18 +65,18 @@
                 <th>Role</th>
                 <th>Exclusão</th>
             </tr>
-            <%for(User user: users){%>
-                <tr>
-                    <td><%= user.getLogin() %></td>
-                    <td><%= user.getName() %></td>
-                    <td><%= user.getRole() %></td>
-                    <td>
-                        <form method="post">
-                            <input type="hidden" name="login" value="<%= user.getLogin() %>"/>
-                            <input type="submit" name="delete" value="Excluir"/>
-                        </form>
-                    </td>
-                </tr>
+            <%for (User user : users) {%>
+            <tr>
+                <td><%= user.getLogin()%></td>
+                <td><%= user.getName()%></td>
+                <td><%= user.getRole()%></td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" name="login" value="<%= user.getLogin()%>"/>
+                        <input type="submit" name="delete" value="Excluir"/>
+                    </form>
+                </td>
+            </tr>
             <%}%>
         </table>
         <%}%>
