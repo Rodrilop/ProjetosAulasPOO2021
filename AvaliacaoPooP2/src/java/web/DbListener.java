@@ -5,6 +5,7 @@
  */
 package web;
 
+import db.User;
 import java.sql.*;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
