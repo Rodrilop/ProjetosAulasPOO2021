@@ -5,6 +5,7 @@
  */
 package web;
 
+import db.Disciplina;
 import db.User;
 import java.sql.*;
 import javax.servlet.ServletContextEvent;
@@ -36,9 +37,18 @@ public class DbListener implements ServletContextListener {
                 User.insertUser("rodrigo", "Rodrigo Carlos de Souza Lopes", "ADMIN", "1234");
                 User.insertUser("fulano", "Fulano da Silva", "USER", "1234");
             }
+            stmt.execute(Disciplina.getCreateStatement());
+            if(Disciplina.getList().isEmpty()){
+                Disciplina.insert("Programação Orientada a Objetos", "Segunda-feira", "19h00-22h30", 4, 10, 10);
+                Disciplina.insert("Engenharia de Software III", "Terça-feira", "19h00-22h30", 4, 10, 10);
+                Disciplina.insert("Sistemas Operacionais II", "Quarta-feira", "19h00-22h30", 4, 10, 10);
+                Disciplina.insert("Linguagem de Programação IV - INTERNET", "Quinta-feira", "19h00-22h30", 4, 10, 10);
+                Disciplina.insert("Sistemas Operacionais II", "Sexta-feira", "20h30-22h30", 2, 10, 10);
+                Disciplina.insert("Programação para Dispositivos Móveis", "Sábado", "8h00-11h30", 4, 10, 10);
+                            }
             stmt.close();
             con.close();
-        } catch (Exception ex) {
+        }catch(Exception ex){
             exception = ex;
         }
     }
