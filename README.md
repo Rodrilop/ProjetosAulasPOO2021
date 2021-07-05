@@ -1,5 +1,3 @@
-# Programação Orientada a Objetos 2021
-Projetos das Aulas de Programação Orientada a Objetos
 <div align="center">
 
 <img src = "https://img.shields.io/static/v1?label=license&message=MIT&color=<COLOR>&style=<STYLE>&logo=<LOGO>" /> 
